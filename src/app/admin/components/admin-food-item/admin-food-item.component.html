@@ -1,0 +1,114 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2" >
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success">
+                    <b>Add new FoodItem</b>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="foodItemForm" >
+                        <div class="row fw-bold">
+                            <span>FoodItem Code</span>
+                        </div>
+                        <div class="mt-2">
+                            <input type="text" formControlName="code" class="form-control" />
+                        </div>
+                        <div class="row">
+                            <span class="errorinfo"
+                                *ngIf="foodItemForm.controls['code'].touched && foodItemForm.controls['code'].invalid">
+                                <b>FoodItem Code is required</b>
+                            </span>
+                        </div>
+                        
+                        <div class="row fw-bold">
+                            <span>FoodItem Category</span>
+                        </div>
+                        <div class="mt-2">
+                            <select class="form-control" formControlName="category"  >
+                                <option [value]="null" disabled></option>
+                                <option *ngFor="let foodCategory of foodCategory_list" [value]="foodCategory.foodCategoryId">{{foodCategory.categoryName}}</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <span class="errorinfo"
+                                *ngIf="foodItemForm.controls['category'].touched && foodItemForm.controls['category'].invalid">
+                                <b>Select Food Category</b>
+                            </span>
+                        </div>
+
+                        <div class="row fw-bold">
+                            <span>FoodItem Name</span>
+                        </div>
+                        <div class="mt-2">
+                            <input type="text" formControlName="name" class="form-control" />
+                        </div>
+                        <div class="row">
+                            <span class="errorinfo"
+                                *ngIf="foodItemForm.controls['name'].touched && foodItemForm.controls['name'].invalid">
+                                <b>FoodItem Name is required</b>
+                            </span>
+                        </div>
+                        
+                        
+                        <div class="row fw-bold">
+                            <span>FoodItem Brand</span>
+                        </div>
+                        <div class="mt-2">
+                            <input type="text" formControlName="brand" class="form-control" />
+                        </div>
+                        <div class="row">
+                            <span class="errorinfo"
+                                *ngIf="foodItemForm.controls['brand'].touched && foodItemForm.controls['brand'].invalid">
+                                <b>FoodItem Brand is required</b>
+                            </span>
+                        </div>
+
+                        <div class="row fw-bold">
+                            <span>FoodItem Weight</span>
+                        </div>
+                        <div class="mt-2">
+                            <input type="text" formControlName="weight" class="form-control" />
+                        </div>
+                        <div class="row">
+                            <span class="errorinfo"
+                                *ngIf="foodItemForm.controls['weight'].touched && foodItemForm.controls['weight'].invalid">
+                                <b>FoodItem Weight is required</b>
+                            </span>
+                        </div>
+
+                        <div class="row fw-bold">
+                            <span>FoodItem Price</span>
+                        </div>
+                        <div class="mt-2">
+                            &#8377; <input type="text" formControlName="price" class="form-control" />
+                        </div>
+                        <div class="row">
+                            <span class="errorinfo"
+                                *ngIf="foodItemForm.controls['price'].touched && foodItemForm.controls['price'].invalid">
+                                <b>FoodItem Price is required</b>
+                            </span>
+                        </div>
+
+                        <div class="row fw-bold">
+                            <span>Image</span>
+                        </div>
+                        <div class="mt-2">
+                            <input type="file" accept="image/*" class="form-control" (change)="onImageChange($event)" />
+                        </div>
+                        
+                        <div class="row mt-2">
+                            <div class="col col-md-4">
+                                <div class="row justify-content-evenly">
+                                    <input type="submit" value="Save" class="col col-md-5 btn btn-success" (click)="saveItem()"
+                                        [disabled]="foodItemForm.invalid" />
+                                    <input type="button" value="Back" class="col col-md-5 btn btn-warning ml-2 "  routerLink="/admin/food-items" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

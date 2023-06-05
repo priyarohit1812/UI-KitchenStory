@@ -1,0 +1,48 @@
+<app-navbar [showSearch]="true"></app-navbar>
+<div class="row">
+    <div class="col col-md-2">
+        <div class="row container-fluid">
+            <div class="col col-md-2 ">
+                <ul>
+                    <li><a class="fw-bold" href="">Categories</a>
+                        <ng-container *ngFor="let category of category_list ">
+                            <div class="row ">
+                                <a href="javascript:void(0);" (click)="searchByCategory(category.id)">
+                                    <div class="col col-md-1"><span>{{category.label}}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </ng-container>
+                    </li>
+                    <li><a class="fw-bold" href="">Brand</a>
+                        <a><ng-container *ngFor="let brand of brand_list ">
+                                <div class="row ">
+                                    <a href="javascript:void(0);" (click)="searchByBrand(brand)">
+                                        <div class="col col-md-1"><span>{{brand}}</span></div>
+                                    </a>
+                                </div>
+                            </ng-container></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-10">
+        <div class="row justify-content">
+            <div class="card col col-md-2" *ngFor="let foodItem of foodItem_list">
+                <div class="card-body  col col-md-12">
+                    <a routerLink="/user/home/food-item-details/{{foodItem.foodItemId}}">
+                        <ng-container>
+                            <div><span>{{foodItem.foodItemName}}</span></div>
+                            <div><img [attr.width]="'150px'" [attr.height]="'150px'" class="img-responsive"
+                                    src={{foodItem.image_url}}></div>
+                            <div><span>Brand: {{foodItem.brand}}</span></div>
+                            <div><span>Weight: {{foodItem.weight}}</span></div>
+                            <div><span>Price: &#8377;{{foodItem.price}}</span></div>
+                        </ng-container>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

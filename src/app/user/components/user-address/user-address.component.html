@@ -1,0 +1,114 @@
+<app-navbar></app-navbar>
+<div class="row justify-content-center">
+    <div class="col col-md-8">
+        <div class="card mt-5">
+            <div class="card-header ">
+                <div class="row">
+                    <b class="col-md-10">Add new Address</b>
+                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="addressForm">
+                    <div class="row">
+                        <div class="row">
+                            <div class="row mt-1">
+                                <div class="col col-md-2"><span>Address 1: </span></div>
+                                <div class="col col-md-10"><input type="text" placeholder="Address 1"
+                                        formControlName="add1" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="addressForm.controls['add1'].touched && addressForm.controls['add1'].invalid">
+                                        <b>Enter Address</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-2"><span>Address 2 : </span></div>
+                                <div class="col col-md-10"><input type="text" placeholder="Address 2"
+                                        formControlName="add2" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-2"><span>Address 3 : </span></div>
+                                <div class="col col-md-10"><input type="text" placeholder="Address 3"
+                                        formControlName="add3" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-2"><span>City : </span></div>
+                                <div class="col col-md-10"><input type="text" placeholder="City" formControlName="city"
+                                        class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="addressForm.controls['city'].touched && addressForm.controls['city'].invalid">
+                                        <b>Enter city</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-2"><span>State : </span></div>
+                                <div class="col col-md-10"><input type="text" placeholder="State"
+                                        formControlName="state" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="addressForm.controls['state'].touched && addressForm.controls['state'].invalid">
+                                        <b>Enter state</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-2"><span>Country: </span></div>
+                                <div class="col col-md-10"><input type="text" placeholder="Country"
+                                        formControlName="country" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="addressForm.controls['country'].touched && addressForm.controls['country'].invalid">
+                                        <b>Enter country</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-2"><span>zipcode: </span></div>
+                                <div class="col col-md-10"><input type="text" placeholder="Zipcode"
+                                        formControlName="zipCode" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="addressForm.controls['zipCode'].touched && addressForm.controls['zipCode'].invalid">
+                                        <b>Enter country</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div *ngIf="isPurchase" class="row mt-1">
+                                <div class="col col-md-2"></div>
+                                <div class="col col-md-10">
+                                    <input class="m-2" type="checkbox" formControlName="isNewAdd" class="form-check-input" />
+                                    <span class="m-2">Save Address </span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!isPurchase" class="row mt-2 justify-content-center">
+                                <div class="col col-md-4">
+                                    <div class="row justify-content-center">
+                                        <input type="submit" value="Save" class="col col-md-5 btn btn-success"
+                                            (click)="saveAddress()" [disabled]="addressForm.invalid" />
+                                    </div>
+                                </div>
+                                <div class="col col-md-4">
+                                    <div class="row justify-content-center">
+                                        <a type="button" class="col col-md-5 btn btn-warning"
+                                            href="/user/profile/ADDRESS">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

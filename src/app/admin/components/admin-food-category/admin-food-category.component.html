@@ -1,0 +1,19 @@
+<div class="row mt-2">
+    <div class="col col-md-2">
+        <span>{{ foodCategory.foodCategoryId }}</span>
+    </div>
+    <div class="col col-md-6">
+        <form [formGroup]="foodCategoryUpdateForm">
+            <input *ngIf="enableEdit" type="text" formControlName="categoryName" class="form-control" />
+        </form>
+        <span *ngIf="!enableEdit">{{ foodCategory.categoryName }}</span>
+    </div>
+    <div class="col col-md-4">
+        <div class="row justify-content-evenly">
+            <button class="btn btn-success col-md-5" *ngIf="!enableEdit" (click)="editCategory()">Edit</button>
+            <button class="btn btn-danger col-md-5" *ngIf="!enableEdit" (click)="deleteCategory()">Delete</button>
+            <button class="btn btn-success col-md-5" *ngIf="enableEdit" (click)="saveCategory()">save</button>
+            <button class="btn btn-danger col-md-5" *ngIf="enableEdit" (click)="cancelCategory()">Cancle</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+            <div class="row justify-content-center mr-5">
+                <a routerLink="/user/address" class="col-md-4 btn btn-success">Add Address</a>
+            </div>
+            <div class="card mt-3">
+                <div class="card-header bg-success">
+                    <div class="row">
+                        <b class="col-md-9">Addresses</b>
+                        <div class="col-md-3">
+                            <input type="text" [(ngModel)]="addressKey" name="addressKey" class="form-control"
+                                (ngModelChange)="SearchAddress()" placeholder="Serach " />
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="border p-3">
+                        <div class="row fw-bold">
+                            <div class="col col-md-9">Address</div>
+                            <div class="col col-md-3 text-center">Actions</div>
+                        </div>
+                        <ng-container
+                            *ngFor="let address of filtered_addressList | paginate:{itemsPerPage:5,currentPage:p}">
+                            <div class="row border p-1">
+                                <div class="col col-md-9">
+                                    <div class="row">{{address.address1}}, {{address.address2}}</div>
+                                    <div *ngIf="address.address3" class="row">{{address.address3}}</div>
+                                    <div class="row">{{address.city}}, {{address.state}}</div>
+                                    <div class="row">{{address.country}} - {{address.zipCode}}</div>
+                                </div>
+                                <div class="col col-md-1 text-center"><a
+                                        routerLink="/user/address/{{address.addressId}}">Edit</a></div>|
+                                <div class="col col-md-1 text-center"><a href="javascript:void(0);"
+                                        (click)="deleteAddress(address.addressId)">Delete</a></div>
+
+                            </div>
+                        </ng-container>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

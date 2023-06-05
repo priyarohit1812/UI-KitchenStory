@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+
+<div class="row justify-content-center">
+    <div class="col col-md-10">
+        <div class="card mt-3">
+            <div class="card-header bg-success">
+                <div class="row">
+                    <b class="col-md-9">Food Items</b>
+
+                </div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="row fw-bold">
+                    <div class="col col-md-2">Code</div>
+                    <div class="col col-md-3">Name</div>
+                    <div class="col col-md-2 text-center">Image</div>
+                    <div class="col col-md-2">Brand</div>
+                    <div class="col col-md-1">Weight</div>
+                    <div class="col col-md-1">Price</div>
+                    <div class="col col-md-1 text-center">Qty.</div>
+                </div>
+                <ng-container *ngFor="let orderItem of orderItemList;">
+                    <div class="row border p-1">
+                        <div class="col col-md-2"><span>{{orderItem.foodItem.foodItemCode}}</span></div>
+                        <div class="col col-md-3"><span>{{orderItem.foodItem.foodItemName}}</span></div>
+                        <div class="col col-md-2"><img [attr.width]="'100px'" [attr.height]="'100px'"
+                                class="img-responsive" src={{orderItem.foodItem.image_url}}></div>
+                        <div class="col col-md-2"><span>{{orderItem.foodItem.brand}}</span></div>
+                        <div class="col col-md-1"><span>{{orderItem.foodItem.weight}}</span></div>
+                        <div class="col col-md-1"><span>&#8377; {{orderItem.foodItem.price}}</span></div>
+                        <div class="col col-md-1">
+                            <div class="row">
+                                <input type="number" [value]="orderItem.quantity"
+                                    (change)="onQuantityChange(orderItem.foodItem.foodItemId, $event)" />
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+                <div class="col col-md-12 mt-3 ">
+                    <div class="row fw-bold ">
+                        <div class="col col-md-7 "><span>No of Items: {{cart.noOfItems}}</span></div>
+                        <div class="col col-md-5 "><span>Total Price: &#8377;{{cart.totalCartPrice}}</span></div>
+                    </div>
+
+                    <div class="row justify-content-center mt-3">
+                        <div class="col col-md-3 "><button class="btn btn-success" routerLink="/user/checkout">Proceed
+                                To Checkout</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

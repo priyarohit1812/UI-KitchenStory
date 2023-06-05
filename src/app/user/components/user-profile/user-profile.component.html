@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<div class="row">
+    <div class="col col-md-2">
+        <div class="row container-fluid">
+            <div class="col col-md-2 ">
+                <ul>
+                    <li>
+                        <a class="fw-bold" href="user/profile/PROFILE">Profile</a>
+                        <a class="fw-bold" href="user/profile/ADDRESS">Addresses</a>
+                        <a class="fw-bold" href="user/profile/ORDER">Orders</a>                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-10">
+        <app-user-details *ngIf="isProfile"></app-user-details>
+        <app-user-address-list *ngIf="isAddress"></app-user-address-list>
+    </div>
+</div>

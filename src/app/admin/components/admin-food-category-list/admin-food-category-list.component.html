@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2" >
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header bg-success">
+                    <b>Add new category</b>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="foodCategoryForm" (ngSubmit)="saveCategory()">
+                        <div class="row fw-bold">
+                            <span>Category Name</span>
+                        </div>
+                        <div class="mt-2">
+                            <input type="text" formControlName="categoryName" class="form-control" />
+                        </div>
+                        <div class="row">
+                            <span class="errorinfo"
+                                *ngIf="foodCategoryForm.controls.categoryName.touched && foodCategoryForm.controls.categoryName.invalid">
+                                <b>Category Name is required</b>
+                            </span>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col col-md-4">
+                                <div class="row justify-content-evenly">
+                                    <input type="submit" value="Add" class="col col-md-5 btn btn-success"
+                                        [disabled]="foodCategoryForm.invalid" />
+                                    <input type="button" value="Back" class="col col-md-5 btn btn-warning ml-2" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <div class="row">
+                            <b class="col-md-9">Food Categories</b> 
+                            <div class="col-md-3">
+                            <input type="text" [(ngModel)]="categoryName" name="categoryName"  
+                            class="form-control" (ngModelChange)="SearchCategory()"  placeholder="Serach" />
+                        </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="border p-3">
+                            <div class="row fw-bold">
+                                <div class="col col-md-2">Id</div>
+                                <div class="col col-md-6">Category Name</div>
+                                <div class="col col-md-4 text-center">Actions</div>
+                            </div>
+                            <ng-container *ngFor="let category of filteredFoodCategory_list | paginate:{itemsPerPage:5,currentPage:p}">
+                                <app-admin-food-category [foodCategory]="category"
+                                    (deleteFoodCategory)="deleteCategory(category.foodCategoryId)"></app-admin-food-category>
+                            </ng-container>
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

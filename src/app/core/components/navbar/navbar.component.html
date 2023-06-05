@@ -1,0 +1,42 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-success">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a *ngIf="is_admin" class="navbar-brand app-icon" href="/admin/home">Kitchen Story</a>
+        <a *ngIf="!is_admin" class="navbar-brand app-icon" href="/user/home">Kitchen Story</a>
+
+        <ul *ngIf="is_admin" class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="menu-lable nav-link " aria-current="page"
+                href="/admin/food-categories">Food Category</a></li>
+            <li class="nav-item"><a class="menu-lable nav-link " aria-current="page" href="/admin/food-items">Food
+                    Item</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center right-list">
+            <li class="nav-item" *ngIf="!is_admin && showSearch"><input type="search" placeholder="Search"
+                    (keyup)="searchFoodItem($event)" /></li>
+            <li class="nav-item" *ngIf="!is_admin">
+                <a class="nav-link " aria-current="page" href="/user/cart">
+                    <span class="bi bi-cart3 p-2 app-icon" aria-hidden="true">
+                        <span class="badge badge-notify">{{ cart_item_count }}</span>
+                    </span>
+                </a>
+            </li>
+            <li *ngIf="!is_admin" class="nav-item">
+                <a class="nav-link " aria-current="page" href="/user/profile/PROFILE">
+                    <span class="bi bi-person-circle p-2 app-icon" aria-hidden="true">
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="javascript:void(0);" (click)="clearSessionData()">
+                    <span class="bi bi-power p-2 app-icon" aria-hidden="true">
+                    </span>
+                </a>
+            </li>
+        </div>
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
