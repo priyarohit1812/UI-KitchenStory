@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserLoginComponent } from './components/user-login/user-login.component';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
-import { UserHomeComponent } from './components/user-home/user-home.component';
-import { UserFoodItemComponent } from './components/user-food-item/user-food-item.component';
-import { UserCartComponent } from './components/user-cart/user-cart.component';
-import { UserCheckoutComponent } from './components/user-checkout/user-checkout.component';
-import { UserPurchaseOrderComponent } from './components/user-purchase-order/user-purchase-order.component';
 import { UserAddressListComponent } from './components/user-address-list/user-address-list.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
+import { UserCartComponent } from './components/user-cart/user-cart.component';
+import { UserCheckoutComponent } from './components/user-checkout/user-checkout.component';
+import { UserFoodItemComponent } from './components/user-food-item/user-food-item.component';
+import { UserHomeComponent } from './components/user-home/user-home.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { UserOrderDetailComponent } from './components/user-order-detail/user-order-detail.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 const routes: Routes = [
   {
@@ -62,8 +62,12 @@ const routes: Routes = [
     component: UserCheckoutComponent
   },
   {
-    path: 'user/purchaseorder',
-    component: UserPurchaseOrderComponent
+    path: 'user/order',
+    component: UserOrderDetailComponent
+  },
+  {
+    path: 'user/order/:orderId',
+    component: UserOrderDetailComponent
   }
 ];
 

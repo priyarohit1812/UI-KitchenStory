@@ -1,87 +1,223 @@
 <app-navbar></app-navbar>
 <div class="row justify-content-center">
     <div class="col col-md-8">
-
-        <div class="card mt-5">
+        <div class="card mt-2">
             <div class="card-header ">
                 <div class="row">
-                    <b class="col-md-12">Select Payment Option</b>
+                    <b class="col-md-12">Shipping Address</b>
                 </div>
             </div>
             <div class="card-body">
-
-                <form [formGroup]="checkoutForm">
-                    <div class="row">
-                        <div><input type="radio" formControlName="payment" value="pod"><span> Payment On Delivery</span>
-                        </div>
-                        <div><input type="radio" formControlName="payment" value="card"> <span> Debit/Credit Card</span>
-                        </div>
-                        <div class="row">
-                            <span class="errorinfo" *ngIf="checkoutForm.controls['payment'].touched ">
-                                <b>Select payment option</b>
-                            </span>
-                        </div>
-                        <div class="col col-md-6">
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <div class="row">
-
-                                        <div class="row mt-1">
-                                            <div class="col col-md-5"><span>Card Number : </span></div>
-                                            <div class="col col-md-7"><input type="text"
-                                                    placeholder="---- ---- ---- ----" formControlName="number"
-                                                    class="form-control" />
-                                            </div>
-                                            <div class="row">
-                                                <span class="errorinfo"
-                                                    *ngIf="checkoutForm.controls['number'].touched && checkoutForm.controls['number'].invalid">
-                                                    <b>Enter Card Number</b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-1">
-                                            <div class="col col-md-5"><span>Expiry : </span></div>
-                                            <div class="col col-md-7"><input type="text" placeholder="MM/YY"
-                                                    formControlName="expiry" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <span class="errorinfo"
-                                                *ngIf="checkoutForm.controls['expiry'].touched && checkoutForm.controls['expiry'].invalid">
-                                                <b>Enter Expiry date</b>
-                                            </span>
-                                        </div>
-                                        <div class="row mt-1">
-                                            <div class="col col-md-5"><span>CVV : </span></div>
-                                            <div class="col col-md-7"><input type="text" placeholder="cvv"
-                                                    formControlName="cvv" class="form-control" />
-                                            </div>
-                                            <div class="row">
-                                                <span class="errorinfo"
-                                                    *ngIf="checkoutForm.controls['cvv'].touched && checkoutForm.controls['cvv'].invalid">
-                                                    <b>Enter cvv</b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-1">
-                                            <div class="col col-md-5"><span>Name on Card : </span></div>
-                                            <div class="col col-md-7"><input type="text" placeholder="Name on Card"
-                                                    formControlName="name" class="form-control" />
-                                            </div>
-                                            <div class="row">
-                                                <span class="errorinfo"
-                                                    *ngIf="checkoutForm.controls['name'].touched && checkoutForm.controls['name'].invalid">
-                                                    <b>Enter Name on Card</b>
-                                                </span>
-                                            </div>
-                                        </div>
+                <div class="row">
+                    <div class="col col-6">
+                        <form [formGroup]="addressListForm">
+                            <ng-container *ngFor="let address of addressList">
+                                <div class="row border">
+                                    <div class="col col-md-1">
+                                        <input type="radio" formControlName="selAddress" [value]="address.addressId"
+                                            (change)="addressSelect($event, address.addressId)" />
+                                    </div>
+                                    <div class="col col-md-10">
+                                        <div class="row">{{address.address1}}, {{address.address2}}</div>
+                                        <div *ngIf="address.address3" class="row">{{address.address3}}</div>
+                                        <div class="row">{{address.city}}, {{address.state}}</div>
+                                        <div class="row">{{address.country}} - {{address.zipCode}}</div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </ng-container>
+                            <ng-container>
+                                <div class="row border">
+                                    <div class="col col-md-1">
+                                        <input type="radio" formControlName="selAddress" [value]="0"
+                                            (change)="addressSelect($event, 0)" />
+                                    </div>
+                                    <div class="col col-md-10">
+                                        <div class="row">Add New Address</div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </form>
                     </div>
-                </form>
-
+                    <div class="col col-6">
+                        <form class="border p-3" *ngIf="addNewAddress" [formGroup]="newAddressForm">
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Address 1: </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="Address 1"
+                                        formControlName="add1" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="newAddressForm.controls['add1'].touched && newAddressForm.controls['add1'].invalid">
+                                        <b>Enter Address</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Address 2 : </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="Address 2"
+                                        formControlName="add2" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Address 3 : </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="Address 3"
+                                        formControlName="add3" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>City : </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="City" formControlName="city"
+                                        class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="newAddressForm.controls['city'].touched && newAddressForm.controls['city'].invalid">
+                                        <b>Enter city</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>State : </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="State" formControlName="state"
+                                        class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="newAddressForm.controls['state'].touched && newAddressForm.controls['state'].invalid">
+                                        <b>Enter state</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Country: </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="Country"
+                                        formControlName="country" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="newAddressForm.controls['country'].touched && newAddressForm.controls['country'].invalid">
+                                        <b>Enter country</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Zipcode: </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="Zipcode"
+                                        formControlName="zipCode" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="newAddressForm.controls['zipCode'].touched && newAddressForm.controls['zipCode'].invalid">
+                                        <b>Enter country</b>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col col-md-8">
+
+        <div class="card mt-2">
+            <div class="card-header ">
+                <div class="row">
+                    <b class="col-md-12">Payment Options</b>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-6">
+                        <form [formGroup]="paymentOptionForm">
+                            <div class="row">
+                                <div class="col col-md-1">
+                                    <input type="radio" formControlName="payment" [value]="PAYMENT_OPTION_COD"
+                                        [(ngModel)]="selectedPaymentOption">
+                                </div>
+                                <div class="col col-md-9">
+                                    <span> Payment On Delivery</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-1">
+                                    <input type="radio" formControlName="payment" [value]="PAYMENT_OPTION_CARD"
+                                        [(ngModel)]="selectedPaymentOption">
+                                </div>
+                                <div class="col col-md-9">
+                                    <span> Debit/Credit Card</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="errorinfo"
+                                    *ngIf="paymentOptionForm.controls['payment'].touched && paymentOptionForm.controls['payment'].errors">
+                                    <b>Select payment option</b>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col col-6">
+                        <form *ngIf="selectedPaymentOption == PAYMENT_OPTION_CARD" class="border p-3"
+                            [formGroup]="checkoutForm">
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Card Number: </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="---- ---- ---- ----"
+                                        formControlName="cardnumber" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="checkoutForm.controls['cardnumber'].touched && checkoutForm.controls['number'].invalid">
+                                        <b>Enter Card Number</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Expiry: </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="MM/YY"
+                                        formControlName="expiry" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="checkoutForm.controls['expiry'].touched && checkoutForm.controls['expiry'].invalid">
+                                        <b>Enter Expiry date</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>CVV: </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="cvv" formControlName="cvv"
+                                        class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="checkoutForm.controls['cvv'].touched && checkoutForm.controls['cvv'].invalid">
+                                        <b>Enter cvv</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col col-md-4"><span>Name: </span></div>
+                                <div class="col col-md-8"><input type="text" placeholder="Card holder name"
+                                        formControlName="name" class="form-control" />
+                                </div>
+                                <div class="row">
+                                    <span class="errorinfo"
+                                        *ngIf="checkoutForm.controls['name'].touched && checkoutForm.controls['name'].invalid">
+                                        <b>Enter Name on Card</b>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center mt-5">
+    <div class="col col-md-2">
+        <button class="btn btn-success" (click)="onCheckOut()">Checkout</button>
+    </div>
+</div>

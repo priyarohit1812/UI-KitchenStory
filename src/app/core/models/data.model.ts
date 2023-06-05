@@ -17,14 +17,14 @@ export interface Address {
     country: string,
     zipCode: string,
     user?: User,
-    saveAddress?:boolean
+    saveAddress?: boolean
 }
 
 
 export interface FoodCategory {
     foodCategoryId: number,
     categoryName: string,
-    foodItems:[]
+    foodItems: []
 }
 
 export interface FoodItem {
@@ -35,7 +35,7 @@ export interface FoodItem {
     weight: string,
     image_url: string,
     price: number,
-    foodCategory:FoodCategory
+    foodCategory: FoodCategory
 }
 
 export interface Response {
@@ -54,26 +54,49 @@ export interface OrderItem {
     orderItemId: number,
     quantity: number,
     totalPrice: number,
-    foodItem:FoodItem
+    foodItem: FoodItem
 }
 
 export interface cartResponse {
-    cart:Cart,
-    orderItems:OrderItem[]
+    cart: Cart,
+    orderItems: OrderItem[]
 }
 
-export interface Payment{
-    paymentId:number,
-    paymentType:[],
-    paymentStatus:[],
+export interface Payment {
+    paymentId: number,
+    paymentType: number,
+    paymentStatus: number,
     remark: string
 }
 
-export interface PurchaseOrder{
+export interface PurchaseOrder {
     purchaseOrderId: number,
-    orderDate:Date,
-    user:[],
-    cart:[],
-    address:[],
-    payment:[]
+    orderDate: Date,
+    user: User,
+    cart: Cart,
+    address: Address,
+    payment: Payment
+}
+
+export interface PurchaseOrderRequest {
+    address: Address,
+    payment: Payment
+}
+
+export interface PurchaseOrderResponse {
+    order: PurchaseOrder,
+    orderItems: OrderItem[]
+}
+
+export enum PaymentType{
+    CreditCard,
+    CashOnDelivery
+}
+
+export enum PaymentStatus{
+    Pending,
+    Authorized,
+    Captured,
+    AuthorizationFailed,
+    CaptureFailed,
 }
