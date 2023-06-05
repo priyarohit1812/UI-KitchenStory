@@ -7,9 +7,9 @@ import { UserCheckoutComponent } from './components/user-checkout/user-checkout.
 import { UserFoodItemComponent } from './components/user-food-item/user-food-item.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
-import { UserOrderDetailComponent } from './components/user-order-detail/user-order-detail.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { OrderDetailComponent } from '../core/components/order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -63,11 +63,11 @@ const routes: Routes = [
   },
   {
     path: 'user/order',
-    component: UserOrderDetailComponent
+    component: OrderDetailComponent
   },
   {
     path: 'user/order/:orderId',
-    component: UserOrderDetailComponent
+    component: OrderDetailComponent
   }
 ];
 

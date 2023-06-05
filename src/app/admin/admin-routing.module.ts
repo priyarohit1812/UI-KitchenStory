@@ -6,6 +6,7 @@ import { AdminFoodItemComponent } from './components/admin-food-item/admin-food-
 import { AdminFoodItemListComponent } from './components/admin-food-item-list/admin-food-item-list.component';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminFoodCategoryListComponent } from './components/admin-food-category-list/admin-food-category-list.component';
+import { OrderDetailComponent } from '../core/components/order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'admin/food-items',
     component: AdminFoodItemListComponent
+  },
+  {
+    path: 'admin/order/:orderId',
+    component: OrderDetailComponent
   }
 ];
 

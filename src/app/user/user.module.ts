@@ -16,7 +16,7 @@ import { UserAddressListComponent } from './components/user-address-list/user-ad
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
-import { UserOrderDetailComponent } from './components/user-order-detail/user-order-detail.component';
+import { UserOrderListComponent } from './components/user-order-list/user-order-list.component';
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import { UserOrderDetailComponent } from './components/user-order-detail/user-or
     UserProfileComponent,
     UserAddressListComponent,
     UserDetailsComponent,
-    UserOrderDetailComponent
+    UserOrderListComponent
   ],
   imports: [
     CommonModule,
